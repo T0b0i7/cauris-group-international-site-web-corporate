@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import TopNav from '../TopNav/TopNav'
 import MainMenu from '../MainMenu/MainMenu'
 import SearchBar from '../SearchBar/SearchBar'
@@ -9,6 +9,7 @@ type Props = {}
 const Header = (props: Props) => {
 
   const stickyRef = useRef<HTMLDivElement>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useVerticalScrollEvent((evt:any) => {
     if(evt.currentTarget.scrollY >= 172) {
@@ -26,9 +27,9 @@ const Header = (props: Props) => {
   return (
     <header className="header_area" ref={stickyRef}>
         <TopNav />
-        <MainMenu />
+        <MainMenu onSearch={() => setSearchOpen(true)} />
         
-        <SearchBar />
+        <SearchBar open={searchOpen} onClose={() => setSearchOpen(false)} />
       </header>
   )
 }

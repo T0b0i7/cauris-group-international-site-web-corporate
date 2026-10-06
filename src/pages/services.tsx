@@ -5,17 +5,19 @@ import Stats from '@/components/Stats/Stats';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import Footer from '@/components/Footer/Footer';
 import PageHeader from '@/components/PageHeader/PageHeader';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ServicesPage() {
+  const { t } = useLanguage();
   return <>
   <Head>
-        <title>Sintec Nextjs Starter Template</title>
-        <meta name="description" content="OnePro Nextjs Starter Template is a free template designed for business landing pages, which aligns with the growing trend towards one-page web designs." />
+        <title>{t.pages.servicesTitle} — {t.company.short}</title>
+        <meta name="description" content={t.pages.homeDesc} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <PageHeader title="Our Services" navTitle="Services" />
+      <PageHeader title={t.pages.servicesTitle} navTitle={t.pages.servicesTitle} />
       
       <Services />
       <Stats />

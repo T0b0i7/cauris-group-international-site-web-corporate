@@ -1,23 +1,27 @@
 import React from "react";
 import Link from "next/link";
+import { useLanguage } from '@/context/LanguageContext';
 
 type Props = {
-    title?: string;
-    navTitle?: string;
+  title?: string;
+  navTitle?: string;
 };
 
-const PageHeader = ({ title = "About Us", navTitle = "About Us" }: Props) => {
+const PageHeader = ({ title, navTitle }: Props) => {
+  const { t } = useLanguage();
+  const _title = title ?? t.pages.aboutTitle;
+  const _nav = navTitle ?? _title;
   return (
     <section className="hero-banner hero-banner-sm">
       <div className="container text-center">
-        <h2>{title}</h2>
+        <h2>{_title}</h2>
         <nav aria-label="breadcrumb" className="banner-breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <Link href="/">Home</Link>
+              <Link href="/">{t.pageHeader.home}</Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              {navTitle}
+              {_nav}
             </li>
           </ol>
         </nav>

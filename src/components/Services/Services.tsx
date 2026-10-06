@@ -1,84 +1,41 @@
 import Image from 'next/image'
 import React from 'react'
+import { useLanguage } from '@/context/LanguageContext';
 
-type Props = {}
-
-const Services = (props: Props) => {
+const Services = () => {
+  const { t } = useLanguage();
+  const items = [
+    { img: '/images/i1.png.webp', w: 92, h: 92, title: t.services.s1t, desc: t.services.s1d },
+    { img: '/images/i2.png.webp', w: 83, h: 83, title: t.services.s2t, desc: t.services.s2d },
+    { img: '/images/i3.png.webp', w: 53, h: 92, title: t.services.s3t, desc: t.services.s3d },
+    { img: '/images/i4.png.webp', w: 82, h: 82, title: t.services.s4t, desc: t.services.s4d },
+    { img: '/images/i2.png.webp', w: 83, h: 83, title: t.services.s5t, desc: t.services.s5d },
+    { img: '/images/i1.png.webp', w: 92, h: 92, title: t.services.s6t, desc: t.services.s6d },
+  ];
   return (
     <section className="service-area area-padding">
-        <div className="container">
-          <div className="area-heading">
-            <h3 className="line">What We Provide</h3>
-            <p>Together female let signs for for fish fowl may first.</p>
-          </div>
-          <div className="row">
-            <div className="col-md-6 col-xl-3">
-              <div className="single-service">
-                <div className="service-icon">
-                  <Image width={92} height={92} src="/images/i1.png.webp" alt="" />
-                  
-                </div>
-                <div className="service-content">
-                  <h5>Architecture Design</h5>
-                  <p>
-                    You{`'`}re which creepeth were yielding kind, divide sixten
-                    po gatherin all first fill Seed wherein life. Years one
-                    fifth{" "}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-6 col-xl-3">
-              <div className="single-service">
-                <div className="service-icon">
-                  <Image width={83} height={83} src="/images/i2.png.webp" alt="" />
-                </div>
-                <div className="service-content">
-                  <h5>Building Construction</h5>
-                  <p>
-                    You{`'`}re which creepeth were yielding kind, divide sixten
-                    po gatherin all first fill Seed wherein life. Years one
-                    fifth{" "}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-6 col-xl-3">
-              <div className="single-service">
-                <div className="service-icon">
-                  <Image width={53} height={92} src="/images/i3.png.webp" alt="" />
-                </div>
-                <div className="service-content">
-                  <h5>Building Renovation</h5>
-                  <p>
-                    You{`'`}re which creepeth were yielding kind, divide sixten
-                    po gatherin all first fill Seed wherein life. Years one
-                    fifth{" "}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-6 col-xl-3">
-              <div className="single-service">
-                <div className="service-icon">
-                  <Image width={82} height={82} src="/images/i4.png.webp" alt="" />
-                </div>
-                <div className="service-content">
-                  <h5>Building Maintenance</h5>
-                  <p>
-                    You{`'`}re which creepeth were yielding kind, divide sixten
-                    po gatherin all first fill Seed wherein life. Years one
-                    fifth{" "}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="container">
+        <div className="area-heading">
+          <h3 className="line">{t.services.kicker}</h3>
+          <p>{t.services.sub}</p>
         </div>
-      </section>
+        <div className="row">
+          {items.map((s) => (
+            <div key={s.title} className="col-md-6 col-xl-4">
+              <div className="single-service">
+                <div className="service-icon">
+                  <Image width={s.w} height={s.h} src={s.img} alt="" />
+                </div>
+                <div className="service-content">
+                  <h5>{s.title}</h5>
+                  <p>{s.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
