@@ -48,12 +48,12 @@ export const seedDB: AdminDB = {
     { id: 'prj-4', titre: 'Déploiement réseau télécom', categorie: 'archi', statut: 'brouillon', lieu: 'Djougou', client: 'Opérateur', dateDebut: '2025-08-01', dateFin: '2025-10-31', budget: 22000000, image: U3, descriptionFr: 'Infra réseau.', descriptionEn: 'Network infra.', vedette: false, createdAt: now, updatedAt: now },
   ],
   services: [
-    { id: 'srv-1', code: 's1', titreFr: 'BTP - Bâtiment & Travaux Publics', titreEn: 'Construction & Public Works', descFr: 'Construction, rénovation et entretien.', descEn: 'Construction, renovation and maintenance.', image: U1, actif: true, ordre: 1 },
-    { id: 'srv-2', code: 's2', titreFr: 'Hydraulique', titreEn: 'Hydraulics', descFr: 'Adduction d’eau, forages.', descEn: 'Water supply, boreholes.', image: U2, actif: true, ordre: 2 },
-    { id: 'srv-3', code: 's3', titreFr: 'Électricité', titreEn: 'Electricity', descFr: 'Installations et maintenance.', descEn: 'Installations and maintenance.', image: U3, actif: true, ordre: 3 },
-    { id: 'srv-4', code: 's4', titreFr: 'Commerce Général', titreEn: 'General Trading', descFr: 'Fourniture de matériaux.', descEn: 'Supply of materials.', image: U4, actif: true, ordre: 4 },
-    { id: 'srv-5', code: 's5', titreFr: 'Déploiement de réseaux', titreEn: 'Network Deployment', descFr: 'Infrastructures télécom.', descEn: 'Telecom infrastructure.', image: U1, actif: true, ordre: 5 },
-    { id: 'srv-6', code: 's6', titreFr: 'Import / Export', titreEn: 'Import / Export', descFr: 'Sourcing international.', descEn: 'International sourcing.', image: U2, actif: true, ordre: 6 },
+    { id: 'srv-1', code: 's1', titreFr: 'BTP — Bâtiment & Travaux Publics', titreEn: 'Construction & Public Works', descFr: 'Construction, rénovation et entretien.', descEn: 'Construction, renovation and maintenance.', image: '/images/i1.png.webp', actif: true, ordre: 1 },
+    { id: 'srv-2', code: 's2', titreFr: 'Hydraulique', titreEn: 'Hydraulics', descFr: 'Adduction d’eau, forages.', descEn: 'Water supply, boreholes.', image: '/images/i2.png.webp', actif: true, ordre: 2 },
+    { id: 'srv-3', code: 's3', titreFr: 'Électricité', titreEn: 'Electricity', descFr: 'Installations et maintenance.', descEn: 'Installations and maintenance.', image: '/images/i3.png.webp', actif: true, ordre: 3 },
+    { id: 'srv-4', code: 's4', titreFr: 'Commerce Général', titreEn: 'General Trading', descFr: 'Fourniture de matériaux.', descEn: 'Supply of materials.', image: '/images/i4.png.webp', actif: true, ordre: 4 },
+    { id: 'srv-5', code: 's5', titreFr: 'Déploiement de réseaux', titreEn: 'Network Deployment', descFr: 'Infrastructures télécom.', descEn: 'Telecom infrastructure.', image: '/images/i2.png.webp', actif: true, ordre: 5 },
+    { id: 'srv-6', code: 's6', titreFr: 'Import / Export', titreEn: 'Import / Export', descFr: 'Sourcing international.', descEn: 'International sourcing.', image: '/images/i1.png.webp', actif: true, ordre: 6 },
   ],
   temoignages: [
     { id: 'tem-1', nom: 'Adame Nesane', role: 'Client', message: 'Équipe sérieuse et polyvalente. Travail soigné, délais respectés.', note: 5, statut: 'valide', image: A1, createdAt: now },
