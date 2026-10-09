@@ -10,6 +10,9 @@ const nextConfig = {
   trailingSlash: true,
   basePath: isGhPages ? repoBase : '',
   assetPrefix: isGhPages ? `${repoBase}/` : '',
+  env: {
+    NEXT_PUBLIC_BASEPATH: isGhPages ? repoBase : '',
+  },
   images: {
     unoptimized: true,
     remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }],

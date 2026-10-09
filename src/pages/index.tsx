@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { img } from '@/lib/base';
 import Header from '@/components/Header/Header';
 import HomeBanner from '@/components/HomeBanner/HomeBanner';
 import About from '@/components/About/About';
@@ -17,7 +18,7 @@ export default function HomePage() {
         <title>{t.pages.homeTitle}</title>
         <meta name="description" content={t.pages.homeDesc} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={img(`/favicon.ico`)} />
       </Head>
       <Header />
       <HomeBanner />

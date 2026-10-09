@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Parallax } from "react-parallax";
 import { useLanguage } from '@/context/LanguageContext';
+import { img } from '@/lib/base';
 
 const HomeBanner = () => {
   const { t } = useLanguage();
@@ -9,7 +10,7 @@ const HomeBanner = () => {
     <section className="home_banner_area">
       <Parallax
         blur={0}
-        bgImage="/images/home-banner.jpg.webp"
+        bgImage={img('/images/home-banner.jpg.webp')}
         bgImageAlt="home banner"
         strength={100}
         className="container-fluid banner_inner d-flex"

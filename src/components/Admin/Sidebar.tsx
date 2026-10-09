@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { LayoutDashboard, FileText, Building2, Layers, Quote, Inbox, Send, Users, Settings, ScrollText } from 'lucide-react';
 import { useAdmin } from '@/lib/admin/AdminContext';
+import { img } from '@/lib/base';
 
 const items = [
   { href: '/admin', label: 'Tableau de bord', icon: LayoutDashboard, adminOnly: false },
@@ -27,7 +28,7 @@ export function Sidebar() {
     <aside className="dash-side">
       <div className="dash-brand dash-brand-corner">
         <span className="dash-logo-img">
-          <Image src="/images/logo.jpeg" alt="Cauris Group" width={56} height={56} />
+          <Image src={img('/images/logo.jpeg')} alt="Cauris Group" width={56} height={56} />
         </span>
         <div>
           <div className="dash-brand-name">CAURIS GROUP</div>

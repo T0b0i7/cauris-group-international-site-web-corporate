@@ -12,7 +12,7 @@ const SinglePost = () => {
           <div className="col-lg-8">
             <div className="single-post">
               <div className="feature-img">
-                <Image width={750} height={400} className="img-fluid" src="/images/1.jpg.webp" alt={t.article.title} />
+                <Image width={750} height={400} className="img-fluid" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" alt={t.article.title} />
               </div>
               <div className="blog_details">
                 <h2>{t.article.title}</h2>

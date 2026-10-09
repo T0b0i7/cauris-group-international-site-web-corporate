@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { img } from '@/lib/base';
 import Header from '@/components/Header/Header';
 
 import Footer from '@/components/Footer/Footer';
@@ -14,7 +15,7 @@ export default function ContactPage() {
         <title>{t.pages.contactTitle} - {t.company.short}</title>
         <meta name="description" content={t.pages.homeDesc} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={img(`/favicon.ico`)} />
       </Head>
       <Header />
 

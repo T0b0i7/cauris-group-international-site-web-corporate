@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { img } from '@/lib/base';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import PageHeader from '@/components/PageHeader/PageHeader';
@@ -18,7 +19,7 @@ export default function PrivacyPage() {
         <title>{fr ? 'Politique de confidentialité' : 'Privacy Policy'} - {t.company.short}</title>
         <meta name="description" content={fr ? 'Politique de confidentialité et gestion des cookies de Cauris Group International SARL.' : 'Privacy policy and cookie management of Cauris Group International LLC.'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={img(`/favicon.ico`)} />
       </Head>
       <Header />
       <PageHeader title={fr ? 'Politique de confidentialité' : 'Privacy Policy'} navTitle={fr ? 'Politique de confidentialité' : 'Privacy Policy'} />

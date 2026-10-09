@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image"
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/lib/admin/AdminContext';
+import { img } from '@/lib/base';
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
@@ -47,7 +48,7 @@ const Testimonials = () => {
         <div className="row">
           <OwlCarousel className="active-testimonial-carusel owl-carousel" {...carouselConfig}>
             {people.map((p, i) => (
-              <div key={i} className="single-testimonial item d-flex flex-row">
+              <div key={i} className="single-testimonial item d-flex flex-row" style={{ backgroundImage: `url(${img('/images/cotation.png')})` }}>
                 <div className="thumb">
                   <Image width={91} height={91} className="img-fluid" src={p.img} alt={p.name} />
                 </div>

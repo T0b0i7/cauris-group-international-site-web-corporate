@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin, isEmail, uid } from '@/lib/admin/AdminContext';
+import { img } from '@/lib/base';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -23,7 +24,7 @@ const Footer = () => {
           <div className="col-lg-4 col-md-6">
             <div className="single-footer-widget">
               <div className="footer-logo">
-                <Image src="/images/logo.jpeg" alt={t.company.name} width={220} height={220} />
+                <Image src={img('/images/logo.jpeg')} alt={t.company.name} width={220} height={220} />
               </div>
               <p className="footer-company">
                 {p?.adresse || t.company.address}<br />{p?.bp || t.company.bp}<br />

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/lib/admin/AdminContext';
+import { img } from '@/lib/base';
 
 const Stats = () => {
   const { t } = useLanguage();
@@ -10,12 +11,12 @@ const Stats = () => {
   const projets = db.parametres?.projetsRealises ?? t.stats.doneCount;
   const quali = db.parametres?.engagementQualite ?? t.stats.ratingValue;
   return (
-    <section className="number-area" id="number-section">
+    <section className="number-area" id="number-section" style={{ backgroundImage: `url(${img('/images/bg1.jpg')})` }}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-5 col-lg-5">
             <div className="number-img">
-              <Image width={368} height={462} src="/images/about2.png.webp" alt="" />
+              <Image width={368} height={462} src={img('/images/about2.png.webp')} alt="" />
             </div>
           </div>
           <div className="col-md-7 col-lg-6">

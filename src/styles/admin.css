@@ -221,7 +221,7 @@
 .dash-date{display:flex;gap:8px;align-items:center;font-size:12px;color:#0a1f44;border-left:1px solid #e4ddc8;padding-left:14px}
 .dash-date b{font-size:12px}
 .dash-content-full{padding:0 28px 28px}
-.dash-hero{position:relative;overflow:hidden;border-radius:16px;margin:18px 0;background:linear-gradient(90deg,#faf7ef 30%,rgba(250,247,239,.55) 55%,rgba(250,247,239,.15)),url(/images/home-banner.jpg.webp);background-size:cover;background-position:70% center;padding:30px 30px;display:flex;justify-content:space-between;gap:20px;border:1px solid #ece4d0}
+.dash-hero{position:relative;overflow:hidden;border-radius:16px;margin:18px 0;background:linear-gradient(90deg,#faf7ef 30%,rgba(250,247,239,.55) 55%,rgba(250,247,239,.15)),url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80);background-size:cover;background-position:70% center;padding:30px 30px;display:flex;justify-content:space-between;gap:20px;border:1px solid #ece4d0}
 .dash-hero h1{font-family:var(--display);font-size:52px;margin:0;letter-spacing:-.02em}
 .dash-hero-kicker{display:flex;align-items:center;gap:12px;margin:8px 0;color:#a8821c;font-size:12px;letter-spacing:.32em;font-weight:700}
 .dash-hero-kicker i{display:block;width:64px;height:1px;background:#c9a227}
@@ -397,7 +397,7 @@
 @media(max-width:1250px){.prj-stats{grid-template-columns:repeat(2,1fr)}.prj-table-wrap{overflow-x:auto}}
 
 /* ===== Page Services exacte maquette ===== */
-.srv-hero{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;background:linear-gradient(90deg,#faf7ef 40%,rgba(250,247,239,.2)),url(/images/home-banner.jpg.webp);background-size:cover;background-position:80% center;border:1px solid #ece4d0;border-radius:14px;padding:26px;margin-bottom:14px}
+.srv-hero{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;background:linear-gradient(90deg,#faf7ef 40%,rgba(250,247,239,.2)),url(https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80);background-size:cover;background-position:80% center;border:1px solid #ece4d0;border-radius:14px;padding:26px;margin-bottom:14px}
 .srv-hero h1{font-family:var(--display);font-size:46px;margin:0}
 .srv-hero p{color:#5b6b84;font-size:13.5px;margin:6px 0 0}
 .srv-hero-quote{border-left:2px solid #0a1f44;padding-left:12px;font-family:var(--display);font-size:14px;line-height:1.5;white-space:nowrap}

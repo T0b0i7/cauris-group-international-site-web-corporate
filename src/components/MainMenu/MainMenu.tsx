@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useLanguage } from '@/context/LanguageContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 import SideDrawer from '@/components/SideDrawer/SideDrawer';
+import { img } from '@/lib/base';
 
 const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
   const { t } = useLanguage();
@@ -41,7 +42,7 @@ const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
         <div className="container main-menu-container nav-pro-inner">
           <Link className="navbar-brand logo_h logo-brand nav-pro-brand" href="/" onClick={() => setBlogOpen(false)}>
             <span className="logo-emblem">
-              <Image src="/images/logo.jpeg" alt={t.company.short} width={72} height={72} />
+              <Image src={img('/images/logo.jpeg')} alt={t.company.short} width={72} height={72} />
             </span>
             <span className="logo-words">
               <span className="logo-main">CAURIS <em>GROUP</em></span>
