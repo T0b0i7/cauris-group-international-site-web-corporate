@@ -4,12 +4,15 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import dynamic from "next/dynamic";
 import Image from "next/image"
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdmin } from '@/lib/admin/AdminContext';
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
   ssr: false,
 });
 
 const Testimonials = () => {
   const { t } = useLanguage();
+  const { db } = useAdmin();
+  const valid = db.temoignages.filter((x) => x.statut === 'valide');
   const carouselConfig = {
     merge: true,
     smartSpeed: 1000,
@@ -29,10 +32,9 @@ const Testimonials = () => {
     },
   };
 
-  const people = [
-    { name: 'Adame Nesane', img: '/images/tes1.jpg.webp' },
-    { name: 'Adam Nahan', img: '/images/tex2.jpg.webp' },
-    { name: 'Adame Nesane', img: '/images/tes1.jpg.webp' },
+  const people = valid.length ? valid.map((v) => ({ name: v.nom, img: v.image, msg: v.message, role: v.role })) : [
+    { name: 'Adame Nesane', img: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=200&q=80', msg: t.testimonials.quote, role: t.testimonials.role },
+    { name: 'Adam Nahan', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80', msg: t.testimonials.quote, role: t.testimonials.role },
   ];
 
   return (
@@ -51,8 +53,8 @@ const Testimonials = () => {
                 </div>
                 <div className="desc">
                   <h4>{p.name}</h4>
-                  <p className="designation">{t.testimonials.role}</p>
-                  <p>{t.testimonials.quote}</p>
+                  <p className="designation">{(p as { role?: string }).role ?? t.testimonials.role}</p>
+                  <p>{(p as { msg?: string }).msg ?? t.testimonials.quote}</p>
                 </div>
               </div>
             ))}

@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdmin, isEmail, uid } from '@/lib/admin/AdminContext';
 
 const Footer = () => {
   const { t } = useLanguage();
+  const { db, saveDB } = useAdmin();
+  const [nl, setNl] = useState(''); const [nlMsg, setNlMsg] = useState('');
+  const p = db.parametres;
+  const subscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isEmail(nl)) { setNlMsg('Email invalide.'); return; }
+    if (db.newsletter.some((x) => x.email.toLowerCase() === nl.toLowerCase().trim())) { setNlMsg('Déjà inscrit.'); return; }
+    saveDB({ ...db, newsletter: [{ id: uid('nl'), email: nl.trim(), statut: 'actif', consentRgpd: true, createdAt: new Date().toISOString() }, ...db.newsletter] }, { entite: 'newsletter', action: 'subscribe-site', detail: nl.trim() });
+    setNlMsg('Inscription confirmée.'); setNl('');
+  };
   return (
     <footer className="footer-area ">
       <div className="container">
@@ -15,9 +26,9 @@ const Footer = () => {
                 <Image src="/images/logo.jpeg" alt={t.company.name} width={220} height={220} />
               </div>
               <p className="footer-company">
-                {t.company.address}<br />{t.company.bp}<br />
-                {t.company.phone1} — {t.company.phone2}<br />
-                <a href={`mailto:${t.company.email}`}>{t.company.email}</a>
+                {p?.adresse || t.company.address}<br />{p?.bp || t.company.bp}<br />
+                {p?.phone1 || t.company.phone1} - {p?.phone2 || t.company.phone2}<br />
+                <a href={`mailto:${p?.email || t.company.email}`}>{p?.email || t.company.email}</a>
               </p>
             </div>
           </div>
@@ -55,28 +66,25 @@ const Footer = () => {
             <div className="single-footer-widget newsletter">
               <h6>{t.footer.newsletterTitle}</h6>
               <div id="mc_embed_signup">
-                <form
-                  target="_blank"
-                  action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                  method="get"
-                  className="form-inline"
-                >
+                <form onSubmit={subscribe} className="form-inline">
                   <div className="form-group row no-gutters">
                     <div className="col-lg-8 col-md-8 col-7">
-                      <input name="EMAIL" placeholder={t.footer.placeholder} required={true} type="email" />
+                      <input name="EMAIL" value={nl} onChange={(e) => setNl(e.target.value)} placeholder={t.footer.placeholder} required={true} type="email" />
                     </div>
                     <div className="col-lg-4 col-md-4 col-5">
-                      <button className="nw-btn main_btn circle">
+                      <button className="nw-btn main_btn circle" type="submit">
                         {t.footer.subscribe}
                         <span className="lnr lnr-arrow-right"></span>
                       </button>
                     </div>
                   </div>
-                  <div className="info"></div>
+                  <div className="info">{nlMsg}</div>
                 </form>
               </div>
               <p>{t.footer.newsletterDesc}</p>
-              <Link className="footer-link" href="/contact">{t.footer.privacy}</Link>
+              <Link className="footer-link" href="/privacy">{t.footer.privacy}</Link>
+              <span style={{ margin: '0 8px' }}>·</span>
+              <Link className="footer-link" href="/privacy">Cookies</Link>
             </div>
           </div>
         </div>
@@ -85,7 +93,7 @@ const Footer = () => {
         <div className="container">
           <div className="row ">
             <p className="col-lg-12 footer-text ">
-              Copyright &copy; {new Date().getFullYear()} {t.footer.madeWith} — {t.footer.rights}
+              Copyright &copy; {new Date().getFullYear()} {t.footer.madeWith} - {t.footer.rights}
             </p>
           </div>
         </div>

@@ -1,10 +1,13 @@
 import Image from 'next/image'
 import React from 'react'
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdmin } from '@/lib/admin/AdminContext';
 
 const Services = () => {
-  const { t } = useLanguage();
-  const items = [
+  const { t, lang } = useLanguage();
+  const { db } = useAdmin();
+  const dyn = [...db.services].sort((a, b) => a.ordre - b.ordre).filter((s) => s.actif);
+  const items = dyn.length ? dyn.map((s) => ({ img: s.image, w: 82, h: 82, title: lang === 'fr' ? s.titreFr : s.titreEn, desc: lang === 'fr' ? s.descFr : s.descEn })) : [
     { img: '/images/i1.png.webp', w: 92, h: 92, title: t.services.s1t, desc: t.services.s1d },
     { img: '/images/i2.png.webp', w: 83, h: 83, title: t.services.s2t, desc: t.services.s2d },
     { img: '/images/i3.png.webp', w: 53, h: 92, title: t.services.s3t, desc: t.services.s3d },

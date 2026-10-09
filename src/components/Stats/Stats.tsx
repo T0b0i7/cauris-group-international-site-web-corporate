@@ -1,9 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdmin } from '@/lib/admin/AdminContext';
 
 const Stats = () => {
   const { t } = useLanguage();
+  const { db } = useAdmin();
+  const poles = db.parametres?.polesExpertise ?? t.stats.happyCount;
+  const projets = db.parametres?.projetsRealises ?? t.stats.doneCount;
+  const quali = db.parametres?.engagementQualite ?? t.stats.ratingValue;
   return (
     <section className="number-area" id="number-section">
       <div className="container">
@@ -22,15 +27,15 @@ const Stats = () => {
               <p>{t.stats.desc}</p>
               <div className="number-wrapper">
                 <div className="single-number">
-                  <h5><span className="counter">{t.stats.happyCount}</span></h5>
+                  <h5><span className="counter">{String(poles)}</span></h5>
                   <p>{t.stats.happy}</p>
                 </div>
                 <div className="single-number">
-                  <h5><span className="counter">{t.stats.doneCount}</span>+</h5>
+                  <h5><span className="counter">{String(projets)}</span>+</h5>
                   <p>{t.stats.done}</p>
                 </div>
                 <div className="single-number">
-                  <h5><span className="counter">{t.stats.ratingValue}</span></h5>
+                  <h5><span className="counter">{String(quali)}</span></h5>
                   <p>{t.stats.rating}</p>
                 </div>
               </div>

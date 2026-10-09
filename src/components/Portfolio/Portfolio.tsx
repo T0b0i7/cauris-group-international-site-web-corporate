@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdmin } from '@/lib/admin/AdminContext';
 
 type Props = {
   showHeading?: boolean;
@@ -11,13 +12,15 @@ type FilterKey = 'all' | 'buildings' | 'offices' | 'rebuild' | 'archi';
 
 const Portfolio = ({ showHeading = true }: Props) => {
   const { t } = useLanguage();
+  const { db } = useAdmin();
   const [filter, setFilter] = useState<FilterKey>('all');
 
-  const items: { src: string; cat: Exclude<FilterKey, 'all'>; label: string }[] = [
-    { src: '/images/1.jpg.webp', cat: 'buildings', label: t.portfolio.buildings },
-    { src: '/images/2.jpg.webp', cat: 'offices', label: t.portfolio.offices },
-    { src: '/images/3.jpg.webp', cat: 'rebuild', label: t.portfolio.rebuild },
-    { src: '/images/4.jpg.webp', cat: 'archi', label: t.portfolio.archi },
+  const dyn = db.projets.filter(p => p.statut === 'publie' || p.statut === 'en_cours').map(p => ({ src: p.image, cat: p.categorie as Exclude<FilterKey,'all'>, label: p.titre }));
+  const items: { src: string; cat: Exclude<FilterKey, 'all'>; label: string }[] = dyn.length ? dyn : [
+    { src: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80', cat: 'buildings', label: t.portfolio.buildings },
+    { src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80', cat: 'offices', label: t.portfolio.offices },
+    { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80', cat: 'rebuild', label: t.portfolio.rebuild },
+    { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', cat: 'archi', label: t.portfolio.archi },
   ];
 
   const filters: { key: FilterKey; label: string }[] = [

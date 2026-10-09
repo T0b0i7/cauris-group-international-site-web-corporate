@@ -11,8 +11,16 @@ const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
   const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [blogOpen, setBlogOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const closeDrawer = () => setDrawerOpen(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     const handleRoute = () => {
@@ -28,10 +36,10 @@ const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
   const isBlogActive = router.pathname.startsWith('/blog') || router.pathname.startsWith('/single-blog');
 
   return (
-    <div className="main_menu">
+    <div className={`main_menu nav-pro${scrolled ? ' is-scrolled' : ''}`}>
       <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container main-menu-container">
-          <Link className="navbar-brand logo_h logo-brand" href="/" onClick={() => setBlogOpen(false)}>
+        <div className="container main-menu-container nav-pro-inner">
+          <Link className="navbar-brand logo_h logo-brand nav-pro-brand" href="/" onClick={() => setBlogOpen(false)}>
             <span className="logo-emblem">
               <Image src="/images/logo.jpeg" alt={t.company.short} width={72} height={72} />
             </span>
@@ -42,18 +50,18 @@ const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
           </Link>
 
           <div className="collapse navbar-collapse offset desktop-nav" id="navbarSupportedContent">
-            <ul className="nav navbar-nav menu_nav ml-auto">
+            <ul className="nav navbar-nav menu_nav ml-auto nav-pro-links">
               <li className={`nav-item${isActive('/') ? ' active' : ''}`}>
-                <Link className="nav-link" href="/">{t.nav.home}</Link>
+                <Link className="nav-link" href="/"><span>{t.nav.home}</span></Link>
               </li>
               <li className={`nav-item${isActive('/about-us') ? ' active' : ''}`}>
-                <Link className="nav-link" href="/about-us">{t.nav.about}</Link>
+                <Link className="nav-link" href="/about-us"><span>{t.nav.about}</span></Link>
               </li>
               <li className={`nav-item${isActive('/services') ? ' active' : ''}`}>
-                <Link className="nav-link" href="/services">{t.nav.services}</Link>
+                <Link className="nav-link" href="/services"><span>{t.nav.services}</span></Link>
               </li>
               <li className={`nav-item${isActive('/projects') ? ' active' : ''}`}>
-                <Link className="nav-link" href="/projects">{t.nav.projects}</Link>
+                <Link className="nav-link" href="/projects"><span>{t.nav.projects}</span></Link>
               </li>
               <li className={`nav-item submenu dropdown${blogOpen ? ' show' : ''}${isBlogActive ? ' active' : ''}`}>
                 <button
@@ -64,10 +72,10 @@ const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
                   onClick={() => setBlogOpen((v) => !v)}
                   onMouseEnter={() => setBlogOpen(true)}
                 >
-                  {t.nav.blog}
+                  <span>{t.nav.blog}</span><i className="ti-angle-down nav-caret" aria-hidden="true"></i>
                 </button>
                 <ul
-                  className={`dropdown-menu${blogOpen ? ' show' : ''}`}
+                  className={`dropdown-menu nav-pro-dropdown${blogOpen ? ' show' : ''}`}
                   onMouseLeave={() => setBlogOpen(false)}
                 >
                   <li className="nav-item">
@@ -83,22 +91,25 @@ const MainMenu = ({ onSearch }: { onSearch?: () => void }) => {
                 </ul>
               </li>
               <li className={`nav-item${isActive('/contact') ? ' active' : ''}`}>
-                <Link className="nav-link" href="/contact">{t.nav.contact}</Link>
+                <Link className="nav-link" href="/contact"><span>{t.nav.contact}</span></Link>
               </li>
             </ul>
           </div>
 
-          <div className="right-button">
+          <div className="right-button nav-pro-actions">
             <ul>
               <li className="lang-desktop">
                 <LanguageSwitcher />
               </li>
-              <li className="shop-icon">
+              <li className="nav-cta-item">
+                <Link href="/contact" className="nav-cta">{t.banner.cta}</Link>
+              </li>
+              <li className="shop-icon nav-icon-btn">
                 <a href={`tel:${t.company.phone1.replace(/[^+\d]/g, '')}`} aria-label={t.company.phone1}>
                   <i className="ti-mobile"></i>
                 </a>
               </li>
-              <li>
+              <li className="nav-icon-btn">
                 <button type="button" id="search" className="btn-reset search-btn" onClick={onSearch} aria-label="search">
                   <i className="ti-search"></i>
                 </button>

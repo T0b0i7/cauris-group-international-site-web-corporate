@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdmin, Rules, uid } from '@/lib/admin/AdminContext';
 
 const ContactUs = () => {
   const { t } = useLanguage();
+  const { db, saveDB } = useAdmin();
+  const [ok, setOk] = useState('');
+  const [err, setErr] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const subject = String(data.get('subject') || t.contactSec.subjPh);
-    const body = `${t.contactSec.namePh}: ${data.get('name')}\n${t.contactSec.emailPh}: ${data.get('email')}\n\n${data.get('message')}`;
-    window.location.href = `mailto:${t.company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const payload = { nom: String(data.get('name') || ''), email: String(data.get('email') || ''), objet: String(data.get('subject') || t.contactSec.subjPh), message: String(data.get('message') || '') };
+    const errs = Rules.message(payload);
+    if (errs.length) { setErr(errs.join(' ')); setOk(''); return; }
+    setErr('');
+    try {
+      saveDB({ ...db, messages: [{ id: uid('msg'), ...payload, statut: 'nouveau' as const, assigneA: '', createdAt: new Date().toISOString() }, ...db.messages] }, { entite: 'message', action: 'create-site', detail: payload.email });
+    } catch {}
+    setOk('Message enregistré. Nous vous répondrons sous 48h ouvrées.');
+    e.currentTarget.reset();
+    const subject = payload.objet;
+    const body = `${payload.nom}\n${payload.email}\n\n${payload.message}`;
+    void subject; void body;
   };
 
   return (
@@ -58,6 +71,8 @@ const ContactUs = () => {
               <div className="form-group mt-3">
                 <button type="submit" className="button button-contactForm">{t.contactSec.send}</button>
               </div>
+              {err && <p style={{color:'#b42318'}}>{err}</p>}
+              {ok && <p style={{color:'#067647'}}>{ok}</p>}
             </form>
           </div>
           <div className="col-lg-4">
