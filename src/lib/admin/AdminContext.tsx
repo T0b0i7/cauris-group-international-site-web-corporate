@@ -32,7 +32,10 @@ function loadDB(): AdminDB {
     if (!raw) { window.localStorage.setItem(DB_KEY, JSON.stringify(seedDB)); return seedDB; }
     const parsed = JSON.parse(raw) as AdminDB;
     if (!parsed.articles || !parsed.utilisateurs) throw new Error('db invalide');
-    return { ...seedDB, ...parsed };
+    const merged = { ...seedDB, ...parsed };
+    // Les visuels des 6 pôles sont des icônes fixes : on les réimpose pour que le site public les affiche même avec une base locale antérieure.
+    merged.services = seedDB.services;
+    return merged;
   } catch { return seedDB; }
 }
 function loadSession(): Session | null {
