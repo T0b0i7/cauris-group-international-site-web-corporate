@@ -545,3 +545,9 @@ img, svg, video { max-width: 100%; height: auto; }
 .cookie-btn.outline{background:#f2f4f8}
 .cookie-custom{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;margin-bottom:10px}
 .cookie-custom label{display:flex;gap:6px;align-items:center}
+
+/* icones services confinees cercles uniformes */
+.service-area .single-service .service-icon{width:120px !important;height:110px !important;display:flex !important;align-items:center !important;justify-content:center !important;margin:0 auto 24px !important}
+.service-area .single-service .service-icon img{max-width:84px !important;max-height:84px !important;width:auto !important;height:auto !important;object-fit:contain !important}
+.service-area .single-service .service-icon:after{left:50% !important;transform:translateX(-50%) !important;top:10px !important}
+.service-area .single-service .service-content h5{min-height:48px}
